@@ -2,20 +2,77 @@
 <html>
 
 <head>
-    <title>My first Vue app</title>
-    <script src="https://unpkg.com/vue"></script>
+    <title>NUEiP Golang 工程師訓練營</title>
+
 </head>
 
 <body>
     <div id="app">
-        {{ message }}
+        <div>
+            <self-info></self-info>
+            <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
+            </question-item>
+        </div>
     </div>
 
+    <template id="selfInfo">
+        <ul>
+            <div>Title</div>
+            {{ introduction }}
+        </ul>
+    </template>
+
+    <template id="question">
+        <div>
+            <p v-on:click="openAnswer" v-bind:title="message">{{ questioninfo.q }}</p>
+            <p v-if=isopen>{{ questioninfo.a }}</p>
+        </div>
+    </template>
+
+    <script src="https://unpkg.com/vue"></script>
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Hello Vue!'
+                questionsList: [{
+                    id: 1,
+                    q: '對於人易科技的瞭解',
+                    a: 'asd'
+                }, {
+                    id: 2,
+                    q: '為什麼想成為工程師（請以自我期許帶入：前端、後端、或全端工程師）',
+                    a: 'asd'
+                }, {
+                    id: 3,
+                    q: '為了成為工程師，曾經做過什麼努力？',
+                    a: 'asd'
+                }]
+            },
+            components: {
+                'self-info': {
+                    template: '#selfInfo',
+                    data: function () {
+                        return {
+                            introduction: 'abc'
+                        };
+                    },
+                },
+
+                'question-item': {
+                    template: '#question',
+                    props: ['questioninfo'],
+                    data: function () {
+                        return {
+                            isopen: false,
+                            message: 'click me'
+                        };
+                    },
+                    methods: {
+                        openAnswer() {
+                            this.isopen = !this.isopen
+                        }
+                    }
+                },
             }
         })
     </script>
