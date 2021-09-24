@@ -3,12 +3,11 @@
 
 <head>
     <title>NUEiP Golang 工程師訓練營</title>
-
 </head>
 
 <body>
     <div id="app">
-        <div>
+        <div class="container">
             <self-info></self-info>
             <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
             </question-item>
@@ -16,20 +15,31 @@
     </div>
 
     <template id="selfInfo">
-        <ul>
-            <div>Title</div>
-            {{ introduction }}
-        </ul>
-    </template>
-
-    <template id="question">
-        <div>
-            <p v-on:click="openAnswer" v-bind:title="message">{{ questioninfo.q }}</p>
-            <p v-if=isopen>{{ questioninfo.a }}</p>
+        <div class="row" v-bind:title="message">
+            <h1 class="text-center">自我介紹</h1>
+            </br>
+            <h4 class="my-content">{{ introduction }}</h4>
         </div>
     </template>
 
+
+    <template id="question">
+        <div class="row" v-on:mouseleave="closeAnswer">
+            <div class="text-center">
+                <h1 v-on:mouseenter="openAnswer">{{
+                    questioninfo.q }}</h1>
+            </div>
+            <h4 class="my-content" v-if=isopen>{{ questioninfo.a }}</h4>
+
+        </div>
+    </template>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
     <script src="https://unpkg.com/vue"></script>
+
     <script>
         var app = new Vue({
             el: '#app',
@@ -37,15 +47,36 @@
                 questionsList: [{
                     id: 1,
                     q: '對於人易科技的瞭解',
-                    a: 'asd'
+                    a: '在申請NUEiP Golang培訓營之前並沒有聽過人易科技，造訪官網後我對人易科技的了解如下。\
+                    ->貴公司主要服務對象為企業，客製化企業客戶的系統，自動化人資管理、企業內部程序、企業客戶名單管理等等的業務。\
+                    --->人資管理包含上下班打卡、薪資系統、加班排班，劃分權限來方便管理。\
+                    --->內部程序就是像請假單、報價單等書面流程轉成自動化的線上填表。\
+                    --->企業客戶名單管理就是把企業客戶建檔、分類、處存，還可以讓業務自訂義客戶的分類。'
                 }, {
                     id: 2,
                     q: '為什麼想成為工程師（請以自我期許帶入：前端、後端、或全端工程師）',
-                    a: 'asd'
+                    a: '目前我的方向是學習後端的技能，對我而言，我期許自己有發現需求和提供解決之道的能力。像是貴公司有不同的客戶，那每位客戶的需求可能不盡相同，有些可能要簡化書本的行政流程，有些可能要一個有活動就自動發email的功能。可能有時連客戶也不確定自己要什麼功能。我想成為有這樣能力的工程師，可能協助客戶找到所需，去架構系統要長的樣子，再去實做出來。所以後端工程師為切入點我認為有助我培養這樣的能力。'
                 }, {
+
                     id: 3,
                     q: '為了成為工程師，曾經做過什麼努力？',
-                    a: 'asd'
+                    a: '工程師是長期久坐的族群，防止長期久坐的慢性病，我每周會盡量去三次以上的健身房，增進體態，維護健康。《美國流行病學期刊》（American Journal of Epidemiology）的研究指出，每天坐著超過6小時或更久，會提高14種疾病的致命風險，包括：（1）癌症、（2）心臟病、（3）糖尿病、（4）腎臟病、（5）慢性阻塞性肺病（COPD）、（6）其他肺部疾病、（7）肝病、（8）消化性潰瘍、（9）其他消化系統疾病、（10）帕金森氏病、（11）阿阿茲海默症、（12）神經失調、（13）肌肉骨骼疾病、（14）自殺。尤其是女性，比起坐著3小時的人增加37%風險率，男性則是17%。 以上參考於 早安健康 -- 久坐不動是慢性自殺，研究：一天11分鐘降低致病死亡率'
+                }, {
+                    id: 4,
+                    q: '對於工程師的職業想像是什麼？',
+                    a: '工程師之間團隊合作，完成系統開發，並且不斷學習業界新技術來應用在開發的軟體上，彼此可能有side project可以互相討論和互相學習'
+                }, {
+                    id: 5,
+                    q: '如果參與這個計畫，會怎麼安排學習時間？',
+                    a: '我會利用早上6-12點的時間做課堂作業和專案或是上課，我認為一段完整且不被打擾的時段讓我比較有效率，下午安排運動和閱讀有關行銷的書籍(現在的興趣)，晚上再花一、兩個小時去複習golang課程。'
+                }, {
+                    id: 6,
+                    q: '如果參與這個計畫，預期會碰到什麼困難？你打算怎麼解決它？',
+                    a: 'Docker不太熟悉，雖然有練習操作過但不太懂其中的概念，可能是我會遇到的困難。我認為技術上的困難可以多去爬爬文，看stackoverflow、或是官方文件裡有沒有同樣問題的解答。找不到答案也可以問朋友、同學、老師。'
+                }, {
+                    id: 7,
+                    q: '想要對我們說的事情？',
+                    a: '很期待可以學到Goroutine、channel等一些我碰過但不熟悉的golang的應用或是一些我不會的網頁技術，希望能學到很多。'
                 }]
             },
             components: {
@@ -53,7 +84,8 @@
                     template: '#selfInfo',
                     data: function () {
                         return {
-                            introduction: 'abc'
+                            introduction: '我叫孫啟偉，大學主修是資訊科學，大學畢業後剛當完兵(兩周前退伍)。期望自己不只能寫程式，在大學最後一學期也去商管學院上財務管理、經濟學等課，把科技運用在企業上。平時喜歡看書自學，接處電商經營、財務管理、SEO優化及數位廣告行銷等書籍。閱讀是我其中一樣興趣，接觸新的領域給我驚奇的感覺，以不同角度看問題，同時訓練自己學習能力。期許自己能兼具創意和專業知識，協助客人、公司能不斷創新並提升效率、克服挑戰。',
+                            message: 'Hello'
                         };
                     },
                 },
@@ -63,19 +95,36 @@
                     props: ['questioninfo'],
                     data: function () {
                         return {
-                            isopen: false,
-                            message: 'click me'
+                            isopen: false
                         };
                     },
                     methods: {
                         openAnswer() {
-                            this.isopen = !this.isopen
+                            this.isopen = true
+                        },
+                        closeAnswer() {
+                            this.isopen = false
                         }
                     }
                 },
             }
         })
     </script>
+
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .container {
+            color: #000000;
+        }
+
+        .my-content {
+            background-color: #F5F5F5;
+            color: #000000;
+        }
+    </style>
 </body>
 
 </html>
