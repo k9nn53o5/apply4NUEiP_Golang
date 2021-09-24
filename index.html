@@ -18,7 +18,7 @@
         <div class="row" v-bind:title="message">
             <h1 class="text-center">自我介紹</h1>
             </br>
-            <h4 class="my-content">{{ introduction }}</h4>
+            <div class="my-content">{{ introduction }}</div>
         </div>
     </template>
 
@@ -29,7 +29,7 @@
                 <h1 class="question-title" v-on:mouseenter="openAnswer">{{
                     questioninfo.q }}</h1>
             </div>
-            <h4 class="my-content" v-if=isopen>{{ questioninfo.a }}</h4>
+            <div class="my-content" v-if=isopen>{{ questioninfo.a }}</div>
 
         </div>
     </template>
@@ -127,6 +127,7 @@
 
         .my-content {
             color: #000000;
+            font-size: large;
         }
     </style>
 </body>
