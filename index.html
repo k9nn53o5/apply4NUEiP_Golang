@@ -9,8 +9,11 @@
     <div id="app">
         <div class="container">
             <self-info></self-info>
-            <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
-            </question-item>
+            <transition-group name="listSlide">
+                <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
+                </question-item>
+            </transition-group>
+
         </div>
     </div>
 
@@ -29,7 +32,9 @@
                 <h1 class="question-title" v-bind:class="{antiwhite:isopen}" v-on:mouseenter="openAnswer">{{
                     questioninfo.q }}</h1>
             </div>
-            <div class="my-content" v-if=isopen>{{ questioninfo.a }}</div>
+            <transition name="slide-fade">
+                <div class="my-content" v-if=isopen>{{ questioninfo.a }}</div>
+            </transition>
 
         </div>
     </template>
@@ -133,6 +138,33 @@
         .my-content {
             color: #000000;
             font-size: 24px;
+        }
+
+        .slide-fade-enter-active {
+            transition: all .5s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        .slide-fade-enter,
+        .slide-fade-leave-to {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        .slideList-leave-active,
+        .slideList-enter-active {
+            transition: all .9s ease;
+        }
+
+        .slideList-enter-from {
+            transform: translateX(-100%);
+        }
+
+        .slideList-leave-to {
+            transform: translateX(100%);
         }
     </style>
 </body>
