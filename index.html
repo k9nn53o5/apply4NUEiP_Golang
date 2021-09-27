@@ -9,10 +9,8 @@
     <div id="app">
         <div class="container">
             <self-info></self-info>
-            <transition-group name="listSlide">
-                <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
-                </question-item>
-            </transition-group>
+            <question-item v-for="item in questionsList" v-bind:questioninfo="item" v-bind:key="item.id">
+            </question-item>
 
         </div>
     </div>
@@ -24,6 +22,7 @@
             <div class="my-content">{{ introduction }}</div>
         </div>
     </template>
+
 
 
     <template id="question">
@@ -94,7 +93,6 @@
                         };
                     },
                 },
-
                 'question-item': {
                     template: '#question',
                     props: ['questioninfo'],
@@ -105,13 +103,18 @@
                     },
                     methods: {
                         openAnswer() {
+                            window.setTimeout(() => { }, 3000);
                             this.isopen = true
                         },
                         closeAnswer() {
+                            window.setTimeout(() => { }, 3000);
                             this.isopen = false
                         }
                     }
                 },
+            },
+            mounted() {
+                isslide = true;
             }
         })
     </script>
@@ -154,16 +157,16 @@
             opacity: 0;
         }
 
-        .slideList-leave-active,
-        .slideList-enter-active {
+        .listSlide-leave-active,
+        .listSlide-enter-active {
             transition: all .9s ease;
         }
 
-        .slideList-enter-from {
+        .listSlide-enter-from {
             transform: translateX(-100%);
         }
 
-        .slideList-leave-to {
+        .listSlide-leave-to {
             transform: translateX(100%);
         }
     </style>
